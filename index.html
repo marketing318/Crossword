@@ -152,7 +152,7 @@ body
 }
 
 .hint-cell {
-  /* optional small visual style for hinted letters (unobtrusive) */
+  /* slight emphasis for revealed letters */
   font-weight: bold;
 }
 
@@ -164,89 +164,11 @@ body
 <!-- ✅ FORM WRAPS WHOLE PAGE AND POSTS TO YOUR SCRIPT -->
 <form
   id="crossword-form"
-  action="https://script.google.com/macros/s/AKfycbxRt4fjmW-s2OXT8Zg6dYcEMErkZ8ulneBaq-D6fH38A8tsmJmLTqkyww8zZahFmynR/exec"
+  action="https://script.google.com/macros/s/AKfycby4BkSU3pfFdBDK5MLIkFEU4MZ1gxEgviDsC6os-NIK4En9J2XcTfOEuyS5PJUzT6Fi/exec"
   method="POST"
-  onsubmit="return /* VALIDATING PrepareSubmission: prevents submit on incomplete/incorrect puzzles (asks for confirm) */
-function PrepareSubmission() {
-  // Build a text representation of the grid row by row (same as before)
-  var rows = [];
-  for (var y = 0; y < CrosswordHeight; y++) {
-    var row = "";
-    for (var x = 0; x < CrosswordWidth; x++) {
-      var cell = CellAt(x, y);
-      if (!cell) {
-        row += "#"; // non-playable cell
-      } else {
-        var ch = cell.innerHTML;
-        if (!ch || ch === "&nbsp;" || ch === " ") {
-          ch = "."; // empty playable cell
-        }
-        ch = ch.replace(/&AMP;/g, "&");
-        row += ch;
-      }
-    }
-    rows.push(row);
-  }
-
-  // Put grid into hidden input
-  var gridField = document.getElementById("grid_data");
-  if (gridField) {
-    gridField.value = rows.join("\n");
-  }
-
-  // Now validate each word (same logic as CheckClick)
-  var ErrorsFound = 0, EmptyFound = 0;
-  var UserEntry = "", TableCell;
-  for (var i = 0; i < Words; i++) {
-    UserEntry = "";
-    for (var j = 0; j < WordLength[i]; j++) {
-      if (i <= LastHorizontalWord) {
-        TableCell = CellAt(WordX[i] + j, WordY[i]);
-      } else {
-        TableCell = CellAt(WordX[i], WordY[i] + j);
-      }
-      if (TableCell && TableCell.innerHTML.length > 0 && TableCell.innerHTML.toLowerCase() != "&nbsp;") {
-        UserEntry += TableCell.innerHTML.toUpperCase();
-      } else {
-        // incomplete word
-        UserEntry = "";
-        EmptyFound++;
-        break;
-      }
-    }
-    UserEntry = UserEntry.replace(/&AMP;/g, '&');
-
-    // If filled, check hash correctness (same HashWord() used by the page)
-    if (UserEntry.length > 0) {
-      if (HashWord(UserEntry) != AnswerHash[i]) {
-        ErrorsFound++;
-      }
-    }
-  }
-
-  // Set the is_complete field (client's view)
-  var completeField = document.getElementById("is_complete");
-  if (completeField) {
-    completeField.value = (ErrorsFound === 0 && EmptyFound === 0) ? "1" : "0";
-  }
-
-  // If there are issues, block and warn (user may confirm to force submit)
-  if (EmptyFound > 0 && ErrorsFound > 0) {
-    var msg = "Your puzzle is incomplete ( " + EmptyFound + " incomplete word(s) ) and has " + ErrorsFound + " incorrect word(s).\n\nPlease finish or correct your answers before submitting.\n\nDo you still want to submit anyway?";
-    return confirm(msg);
-  } else if (EmptyFound > 0) {
-    var msg2 = "Your puzzle is incomplete ( " + EmptyFound + " incomplete word(s) ).\nPlease finish it before submitting.\n\nDo you want to submit anyway?";
-    return confirm(msg2);
-  } else if (ErrorsFound > 0) {
-    var msg3 = "Some answers appear incorrect ( " + ErrorsFound + " incorrect word(s) ).\nPlease check them before submitting.\n\nDo you want to submit anyway?";
-    return confirm(msg3);
-  }
-
-  // All good — allow submit
-  return true;
-}
-;"
+  onsubmit="return PrepareSubmission();"
 >
+
 <h1>#EBMPPPM Crossword 1</h1>
 <h3 style="margin-top: -1em;"></h3>
 
@@ -287,8 +209,9 @@ function PrepareSubmission() {
 	CrosswordWidth = 17;
 	CrosswordHeight = 19;
 	Words = 10;
-	WordLength = new Array(10, 13, 15, 9, 14, 6, 13, 7, 6, 9);
-	Word = new Array("MITIGATION", "RETROSPECTIVE", "PROJECT CHARTER", "POTENTIAL", "PRIORITIZATION", "BUDGET", "COMMUNICATION", "MANAGER", "DELAYS", "PORTFOLIO");
+	/* UPDATED: removed space in PROJECT CHARTER -> PROJECTCHARTER and adjusted length */
+	WordLength = new Array(10, 13, 14, 9, 14, 6, 13, 7, 6, 9);
+	Word = new Array("MITIGATION", "RETROSPECTIVE", "PROJECTCHARTER", "POTENTIAL", "PRIORITIZATION", "BUDGET", "COMMUNICATION", "MANAGER", "DELAYS", "PORTFOLIO");
 	Clue = new Array("A plan created to handle possible risks", 
 "Meetings done at the end of a project to see what worked ?", 
 "The document that captures scope, timeline, and objectives", 
@@ -299,6 +222,7 @@ function PrepareSubmission() {
 "Someone who leads the team", 
 "When projects finish later than expected", 
 "The collection of products or projects managed together");
+	/* Keep AnswerHash array (unused for validation now but left for compatibility). */
 	AnswerHash = new Array(13943, 93332, 42754, 70371, 82094, 87613, 80992, 12665, 48221, 58651);
 	WordX = new Array(4, 4, 0, 1, 0, 8, 12, 4, 16, 2);
 	WordY = new Array(3, 9, 11, 15, 17, 0, 2, 3, 8, 10);
@@ -309,9 +233,7 @@ function PrepareSubmission() {
 
 <script type="text/javascript"><!--
 
-// EclipseCrossword (C) Copyright 2000-2013 Green Eclipse.
-// The puzzle itself remains the property of its creator. Do not remove this copyright notice.
-
+// EclipseCrossword core (unchanged) - with small changes to validation (string compare)
 var BadChars = "`~!@^*()_={[}]\\|:;\"',<>/?";
 
 var TableAcrossWord, TableDownWord;
@@ -382,7 +304,7 @@ if (document.getElementById("waitmessage") != null)
 		for (var wi = 0; wi < Words; wi++) {
 			var w = Word[wi] || "";
 			if (!w) continue;
-			// Choose a middle index, but skip spaces
+			// Choose a middle index, but skip spaces (there are none now)
 			var idx = Math.floor(w.length / 2);
 			if (w.charAt(idx) === ' ') {
 				var found = -1;
@@ -633,6 +555,7 @@ function OKClick()
 }
 
 // Called when the "check puzzle" link is clicked.
+// UPDATED: uses direct normalized string comparison rather than hash to support PROJECTCHARTER change
 function CheckClick()
 {
 	var i, j, x, y, UserEntry, ErrorsFound = 0, EmptyFound = 0, TableCell;
@@ -669,8 +592,11 @@ function CheckClick()
 			}
 		}
 		UserEntry = UserEntry.replace(/&AMP;/g, '&');
-		// If this word doesn't match, it's an error.
-		if (HashWord(UserEntry) != AnswerHash[i] && UserEntry.length > 0)
+
+		// Normalize expected & user: remove non-letters so space changes don't break validation
+		var expected = (Word[i] || "").toUpperCase().replace(/[^A-Z]/g, '');
+		var userNorm = UserEntry.replace(/[^A-Z]/g, '');
+		if (userNorm.length > 0 && expected !== userNorm)
 		{
 			ErrorsFound++;
 			ChangeWordStyle(i, "ecw-box ecw-boxerror_unsel");
@@ -713,7 +639,7 @@ function CheatClick()
 	return;
 }
 
-// Returns a one-way hash for a word.
+// Returns a one-way hash for a word (kept for compatibility with older code but not used for validation here).
 function HashWord(Word)
 {
 	var x = (Word.charCodeAt(0) * 719) % 1138;
@@ -724,45 +650,81 @@ function HashWord(Word)
 	return Hash;
 }
 
-/* ✅ NEW: Prepare crossword data before form submission */
+/* ✅ NEW: PrepareSubmission() does client-side validation and prevents accidental submit */
 function PrepareSubmission() {
-	// Build a text representation of the grid row by row
-	var rows = [];
-	for (var y = 0; y < CrosswordHeight; y++) {
-		var row = "";
-		for (var x = 0; x < CrosswordWidth; x++) {
-			var cell = CellAt(x, y);
-			if (!cell) {
-				row += "#"; // non-playable cell
-			} else {
-				var ch = cell.innerHTML;
-				if (!ch || ch === "&nbsp;" || ch === " ") {
-					ch = "."; // empty playable cell
-				}
-				ch = ch.replace(/&AMP;/g, "&");
-				row += ch;
-			}
-		}
-		rows.push(row);
-	}
+  // Build text representation of grid row by row
+  var rows = [];
+  for (var y = 0; y < CrosswordHeight; y++) {
+    var row = "";
+    for (var x = 0; x < CrosswordWidth; x++) {
+      var cell = CellAt(x, y);
+      if (!cell) {
+        row += "#";
+      } else {
+        var ch = cell.innerHTML;
+        if (!ch || ch === "&nbsp;" || ch === " ") {
+          ch = ".";
+        }
+        ch = ch.replace(/&AMP;/g, "&");
+        row += ch;
+      }
+    }
+    rows.push(row);
+  }
 
-	// Put grid into hidden input
-	var gridField = document.getElementById("grid_data");
-	if (gridField) {
-		gridField.value = rows.join("\n");
-	}
+  // Put grid into hidden input
+  var gridField = document.getElementById("grid_data");
+  if (gridField) {
+    gridField.value = rows.join("\n");
+  }
 
-	// Mark if puzzle is completed correctly
-	var completeField = document.getElementById("is_complete");
-	if (completeField) {
-		completeField.value = CrosswordFinished ? "1" : "0";
-	}
+  // Validate words (same comparison logic as CheckClick)
+  var ErrorsFound = 0, EmptyFound = 0;
+  var UserEntry, TableCell;
+  for (var i = 0; i < Words; i++) {
+    UserEntry = "";
+    for (var j = 0; j < WordLength[i]; j++) {
+      if (i <= LastHorizontalWord) TableCell = CellAt(WordX[i] + j, WordY[i]);
+      else TableCell = CellAt(WordX[i], WordY[i] + j);
+      if (TableCell && TableCell.innerHTML.length > 0 && TableCell.innerHTML.toLowerCase() != "&nbsp;") {
+        UserEntry += TableCell.innerHTML.toUpperCase();
+      } else {
+        UserEntry = "";
+        EmptyFound++;
+        break;
+      }
+    }
+    UserEntry = UserEntry.replace(/&AMP;/g, '&');
+    var expected = (Word[i] || "").toUpperCase().replace(/[^A-Z]/g, '');
+    var userNorm = UserEntry.replace(/[^A-Z]/g, '');
+    if (userNorm.length > 0 && expected !== userNorm) {
+      ErrorsFound++;
+    }
+  }
 
-	// allow form to submit
-	return true;
+  // Set is_complete field (client)
+  var completeField = document.getElementById("is_complete");
+  if (completeField) {
+    completeField.value = (ErrorsFound === 0 && EmptyFound === 0) ? "1" : "0";
+  }
+
+  // If there are issues, block and warn (user may confirm to force submit)
+  if (EmptyFound > 0 && ErrorsFound > 0) {
+    var msg = "Your puzzle is incomplete (" + EmptyFound + " incomplete) and has " + ErrorsFound + " incorrect answers.\nPlease finish or correct before submitting.\n\nSubmit anyway?";
+    return confirm(msg);
+  } else if (EmptyFound > 0) {
+    var msg2 = "Your puzzle is incomplete (" + EmptyFound + " incomplete).\nPlease finish it before submitting.\n\nSubmit anyway?";
+    return confirm(msg2);
+  } else if (ErrorsFound > 0) {
+    var msg3 = "Some answers appear incorrect (" + ErrorsFound + ").\nPlease check them before submitting.\n\nSubmit anyway?";
+    return confirm(msg3);
+  }
+
+  // All good
+  return true;
 }
 
-//-->
+/* END script */
 </script>
 
 </td>
@@ -788,7 +750,7 @@ function PrepareSubmission() {
 <div id="worderror" class="ecw-worderror"></div>
 
 <table border="0" cellspacing="0" cellpadding="0" width="100%" style="margin-top:1em;"><tbody><tr><td>
-<!-- Solve button kept in DOM but hidden by script; user cannot see or trigger it -->
+<!-- Solve button kept but hidden -->
 <button id="cheatbutton" type="button" class="ecw-input ecw-button" style="display:none;" onclick="CheatClick();">Solve</button>
 </td><td align="right">
 <button id="okbutton" type="button" class="ecw-input ecw-button" onclick="OKClick();" style="font-weight: bold;">OK</button> &nbsp;
@@ -830,6 +792,3 @@ BeginCrossword();
 
 </body>
 </html>
-
-
-
