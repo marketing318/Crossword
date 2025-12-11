@@ -166,7 +166,86 @@ body
   id="crossword-form"
   action="https://script.google.com/macros/s/AKfycbxRt4fjmW-s2OXT8Zg6dYcEMErkZ8ulneBaq-D6fH38A8tsmJmLTqkyww8zZahFmynR/exec"
   method="POST"
-  onsubmit="return PrepareSubmission();"
+  onsubmit="return /* VALIDATING PrepareSubmission: prevents submit on incomplete/incorrect puzzles (asks for confirm) */
+function PrepareSubmission() {
+  // Build a text representation of the grid row by row (same as before)
+  var rows = [];
+  for (var y = 0; y < CrosswordHeight; y++) {
+    var row = "";
+    for (var x = 0; x < CrosswordWidth; x++) {
+      var cell = CellAt(x, y);
+      if (!cell) {
+        row += "#"; // non-playable cell
+      } else {
+        var ch = cell.innerHTML;
+        if (!ch || ch === "&nbsp;" || ch === " ") {
+          ch = "."; // empty playable cell
+        }
+        ch = ch.replace(/&AMP;/g, "&");
+        row += ch;
+      }
+    }
+    rows.push(row);
+  }
+
+  // Put grid into hidden input
+  var gridField = document.getElementById("grid_data");
+  if (gridField) {
+    gridField.value = rows.join("\n");
+  }
+
+  // Now validate each word (same logic as CheckClick)
+  var ErrorsFound = 0, EmptyFound = 0;
+  var UserEntry = "", TableCell;
+  for (var i = 0; i < Words; i++) {
+    UserEntry = "";
+    for (var j = 0; j < WordLength[i]; j++) {
+      if (i <= LastHorizontalWord) {
+        TableCell = CellAt(WordX[i] + j, WordY[i]);
+      } else {
+        TableCell = CellAt(WordX[i], WordY[i] + j);
+      }
+      if (TableCell && TableCell.innerHTML.length > 0 && TableCell.innerHTML.toLowerCase() != "&nbsp;") {
+        UserEntry += TableCell.innerHTML.toUpperCase();
+      } else {
+        // incomplete word
+        UserEntry = "";
+        EmptyFound++;
+        break;
+      }
+    }
+    UserEntry = UserEntry.replace(/&AMP;/g, '&');
+
+    // If filled, check hash correctness (same HashWord() used by the page)
+    if (UserEntry.length > 0) {
+      if (HashWord(UserEntry) != AnswerHash[i]) {
+        ErrorsFound++;
+      }
+    }
+  }
+
+  // Set the is_complete field (client's view)
+  var completeField = document.getElementById("is_complete");
+  if (completeField) {
+    completeField.value = (ErrorsFound === 0 && EmptyFound === 0) ? "1" : "0";
+  }
+
+  // If there are issues, block and warn (user may confirm to force submit)
+  if (EmptyFound > 0 && ErrorsFound > 0) {
+    var msg = "Your puzzle is incomplete ( " + EmptyFound + " incomplete word(s) ) and has " + ErrorsFound + " incorrect word(s).\n\nPlease finish or correct your answers before submitting.\n\nDo you still want to submit anyway?";
+    return confirm(msg);
+  } else if (EmptyFound > 0) {
+    var msg2 = "Your puzzle is incomplete ( " + EmptyFound + " incomplete word(s) ).\nPlease finish it before submitting.\n\nDo you want to submit anyway?";
+    return confirm(msg2);
+  } else if (ErrorsFound > 0) {
+    var msg3 = "Some answers appear incorrect ( " + ErrorsFound + " incorrect word(s) ).\nPlease check them before submitting.\n\nDo you want to submit anyway?";
+    return confirm(msg3);
+  }
+
+  // All good — allow submit
+  return true;
+}
+;"
 >
 <h1>#EBMPPPM Crossword 1</h1>
 <h3 style="margin-top: -1em;"></h3>
@@ -751,5 +830,6 @@ BeginCrossword();
 
 </body>
 </html>
+
 
 
