@@ -151,6 +151,11 @@ body
 	margin-top: 1em;
 }
 
+.hint-cell {
+  /* optional small visual style for hinted letters (unobtrusive) */
+  font-weight: bold;
+}
+
 --></style>
 
 </head>
@@ -294,8 +299,43 @@ if (document.getElementById("waitmessage") != null)
 	}
 	document.writeln("<\/table>");
 	
+	// Reveal one letter per word (safe hint)
+	function RevealHints() {
+		for (var wi = 0; wi < Words; wi++) {
+			var w = Word[wi] || "";
+			if (!w) continue;
+			// Choose a middle index, but skip spaces
+			var idx = Math.floor(w.length / 2);
+			if (w.charAt(idx) === ' ') {
+				var found = -1;
+				for (var d = 1; d < w.length; d++) {
+					if (idx - d >= 0 && w.charAt(idx - d) !== ' ') { found = idx - d; break; }
+					if (idx + d < w.length && w.charAt(idx + d) !== ' ') { found = idx + d; break; }
+				}
+				if (found >= 0) idx = found;
+				else {
+					for (var t = 0; t < w.length; t++) { if (w.charAt(t) !== ' ') { idx = t; break; } }
+				}
+			}
+			var ch = w.charAt(idx).toUpperCase();
+			var sx = WordX[wi], sy = WordY[wi];
+			var cell;
+			if (wi <= LastHorizontalWord)
+				cell = CellAt(sx + idx, sy);
+			else
+				cell = CellAt(sx, sy + idx);
+			if (cell) {
+				// reveal letter but keep normal cell styling; add small class for potential style
+				cell.innerHTML = ch;
+				cell.className = cell.className + " hint-cell";
+			}
+		}
+	}
+
 	// Finally, show the crossword and hide the wait message.
 	Initialized = true;
+	// Reveal hints before displaying
+	RevealHints();
 	document.getElementById("waitmessage").style.display = "none";
 	document.getElementById("crossword").style.display = "block";
 }
