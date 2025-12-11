@@ -450,7 +450,8 @@ function SelectThisWord(event)
 	document.getElementById("wordinfo").innerHTML = ((CurrentWord <= LastHorizontalWord) ? "Across, " : "Down, ") + WordLength[CurrentWord] + " letters.";
 	document.getElementById("wordclue").innerHTML = Clue[CurrentWord];
 	document.getElementById("worderror").style.display = "none";
-	document.getElementById("cheatbutton").style.display = (Word.length == 0) ? "none" : "";
+	/* Force the cheat button to remain hidden so users cannot reveal answers. */
+	try { document.getElementById("cheatbutton").style.display = "none"; } catch(e){}
 	if (TheirWordLength == WordLength[CurrentWord])
 		document.getElementById("wordentry").value = TheirWord.replace(/&AMP;/g, '&');
 	else
@@ -587,13 +588,11 @@ function CheckClick()
 }
 
 // Called when the "cheat" link is clicked.
+// Replaced with a no-op to prevent answer reveal.
 function CheatClick()
 {
-	if (CrosswordFinished) return;
-	var OldWord = CurrentWord;
-	document.getElementById("wordentry").value = Word[CurrentWord];
-	OKClick();
-	ChangeWordStyle(OldWord, "ecw-box ecw-boxcheated_unsel");
+	/* Intentionally empty to prevent showing answers. */
+	return;
 }
 
 // Returns a one-way hash for a word.
@@ -671,7 +670,8 @@ function PrepareSubmission() {
 <div id="worderror" class="ecw-worderror"></div>
 
 <table border="0" cellspacing="0" cellpadding="0" width="100%" style="margin-top:1em;"><tbody><tr><td>
-<button id="cheatbutton" type="button" class="ecw-input ecw-button" onclick="CheatClick();">Solve</button>
+<!-- Solve button kept in DOM but hidden by script; user cannot see or trigger it -->
+<button id="cheatbutton" type="button" class="ecw-input ecw-button" style="display:none;" onclick="CheatClick();">Solve</button>
 </td><td align="right">
 <button id="okbutton" type="button" class="ecw-input ecw-button" onclick="OKClick();" style="font-weight: bold;">OK</button> &nbsp;
 <button id="cancelbutton" type="button" class="ecw-input ecw-button" onclick="DeselectCurrentWord();">Cancel</button>
