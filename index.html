@@ -156,6 +156,16 @@ body
   font-weight: bold;
 }
 
+/* separator cell style (the space between PROJECT and CHARTER) */
+.sep-cell {
+  background-color: #606060 !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+/* ensure separator visually centered */
+.sep-cell::after { content: "■"; display:block; line-height:1; }
+
 --></style>
 
 </head>
@@ -209,9 +219,9 @@ body
 	CrosswordWidth = 17;
 	CrosswordHeight = 19;
 	Words = 10;
-	/* UPDATED: removed space in PROJECT CHARTER -> PROJECTCHARTER and adjusted length */
-	WordLength = new Array(10, 13, 14, 9, 14, 6, 13, 7, 6, 9);
-	Word = new Array("MITIGATION", "RETROSPECTIVE", "PROJECTCHARTER", "POTENTIAL", "PRIORITIZATION", "BUDGET", "COMMUNICATION", "MANAGER", "DELAYS", "PORTFOLIO");
+	/* RESTORED: PROJECT CHARTER with space; length = 15 */
+	WordLength = new Array(10, 13, 15, 9, 14, 6, 13, 7, 6, 9);
+	Word = new Array("MITIGATION", "RETROSPECTIVE", "PROJECT CHARTER", "POTENTIAL", "PRIORITIZATION", "BUDGET", "COMMUNICATION", "MANAGER", "DELAYS", "PORTFOLIO");
 	Clue = new Array("A plan created to handle possible risks", 
 "Meetings done at the end of a project to see what worked ?", 
 "The document that captures scope, timeline, and objectives", 
@@ -222,7 +232,7 @@ body
 "Someone who leads the team", 
 "When projects finish later than expected", 
 "The collection of products or projects managed together");
-	/* Keep AnswerHash array (unused for validation now but left for compatibility). */
+	/* Keep AnswerHash for compatibility (we'll validate by normalized strings instead). */
 	AnswerHash = new Array(13943, 93332, 42754, 70371, 82094, 87613, 80992, 12665, 48221, 58651);
 	WordX = new Array(4, 4, 0, 1, 0, 8, 12, 4, 16, 2);
 	WordY = new Array(3, 9, 11, 15, 17, 0, 2, 3, 8, 10);
@@ -233,12 +243,28 @@ body
 
 <script type="text/javascript"><!--
 
-// EclipseCrossword core (unchanged) - with small changes to validation (string compare)
+// EclipseCrossword core with space-aware logic
+
 var BadChars = "`~!@^*()_={[}]\\|:;\"',<>/?";
 
 var TableAcrossWord, TableDownWord;
 var CurrentWord, PrevWordHorizontal, x, y, i, j;
 var CrosswordFinished, Initialized;
+
+// Helper: return expected character at position p of word windex (uppercase). Could be space.
+function ExpectedChar(wordIndex, pos) {
+  var w = (Word[wordIndex] || "").toUpperCase();
+  if (pos < 0 || pos >= w.length) return '';
+  return w.charAt(pos);
+}
+
+// Count number of letters (non-space A-Z) in a word
+function LettersInWord(wordIndex) {
+  var w = (Word[wordIndex] || "").toUpperCase();
+  var count = 0;
+  for (var k=0;k<w.length;k++) if (/[A-Z]/.test(w.charAt(k))) count++;
+  return count;
+}
 
 // Check the user's browser and then initialize the puzzle.
 if (document.getElementById("waitmessage") != null)
@@ -299,12 +325,12 @@ if (document.getElementById("waitmessage") != null)
 	}
 	document.writeln("<\/table>");
 	
-	// Reveal one letter per word (safe hint)
+	// Reveal one letter per word (safe hint). Skip spaces; also mark separator cell style if needed.
 	function RevealHints() {
 		for (var wi = 0; wi < Words; wi++) {
 			var w = Word[wi] || "";
 			if (!w) continue;
-			// Choose a middle index, but skip spaces (there are none now)
+			// Choose a middle index, but skip spaces
 			var idx = Math.floor(w.length / 2);
 			if (w.charAt(idx) === ' ') {
 				var found = -1;
@@ -325,16 +351,42 @@ if (document.getElementById("waitmessage") != null)
 			else
 				cell = CellAt(sx, sy + idx);
 			if (cell) {
-				// reveal letter but keep normal cell styling; add small class for potential style
-				cell.innerHTML = ch;
-				cell.className = cell.className + " hint-cell";
+				// If this position is a space (separator), style the cell as separator rather than put a letter
+				if (ExpectedChar(wi, idx) === ' ') {
+					cell.innerHTML = "&nbsp;";
+					cell.className = cell.className + " sep-cell";
+				} else {
+					cell.innerHTML = ch;
+					cell.className = cell.className + " hint-cell";
+				}
+			}
+		}
+	}
+
+	// Additionally, mark any separator cells (space positions) in the full grid so they are visible immediately.
+	function MarkSeparators() {
+		for (var wi = 0; wi < Words; wi++) {
+			for (var p = 0; p < WordLength[wi]; p++) {
+				if (ExpectedChar(wi, p) === ' ') {
+					var sx = WordX[wi], sy = WordY[wi];
+					var sepCell;
+					if (wi <= LastHorizontalWord)
+						sepCell = CellAt(sx + p, sy);
+					else
+						sepCell = CellAt(sx, sy + p);
+					if (sepCell) {
+						sepCell.innerHTML = "&nbsp;";
+						sepCell.className = sepCell.className + " sep-cell";
+					}
+				}
 			}
 		}
 	}
 
 	// Finally, show the crossword and hide the wait message.
 	Initialized = true;
-	// Reveal hints before displaying
+	// Mark separators first (so hint doesn't override separator), then reveal letter hints
+	MarkSeparators();
 	RevealHints();
 	document.getElementById("waitmessage").style.display = "none";
 	document.getElementById("crossword").style.display = "block";
@@ -475,7 +527,12 @@ function SelectThisWord(event)
 		else
 			TableCell = CellAt(x, y + i);
 		// Add its contents to the word we're building.
-		if (TableCell.innerHTML != null && TableCell.innerHTML.length > 0 && TableCell.innerHTML != " " && TableCell.innerHTML.toLowerCase() != "&nbsp;")
+		// If this position is a separator (space) show a block char and don't count as a letter
+		if (ExpectedChar(CurrentWord, i) === ' ')
+		{
+			TheirWord += "■";
+		}
+		else if (TableCell.innerHTML != null && TableCell.innerHTML.length > 0 && TableCell.innerHTML != " " && TableCell.innerHTML.toLowerCase() != "&nbsp;")
 		{
 			TheirWord += TableCell.innerHTML.toUpperCase();
 			TheirWordLength++;
@@ -487,13 +544,23 @@ function SelectThisWord(event)
 	}
 	
 	document.getElementById("wordlabel").innerHTML = TheirWord;
-	document.getElementById("wordinfo").innerHTML = ((CurrentWord <= LastHorizontalWord) ? "Across, " : "Down, ") + WordLength[CurrentWord] + " letters.";
+	document.getElementById("wordinfo").innerHTML = ((CurrentWord <= LastHorizontalWord) ? "Across, " : "Down, ") + WordLength[CurrentWord] + " letters. (■ = separator)";
 	document.getElementById("wordclue").innerHTML = Clue[CurrentWord];
 	document.getElementById("worderror").style.display = "none";
 	/* Force the cheat button to remain hidden so users cannot reveal answers. */
 	try { document.getElementById("cheatbutton").style.display = "none"; } catch(e){}
-	if (TheirWordLength == WordLength[CurrentWord])
-		document.getElementById("wordentry").value = TheirWord.replace(/&AMP;/g, '&');
+	// If the number of typed letters equals the required letter count (excluding spaces), prefill entry box
+	if (TheirWordLength == LettersInWord(CurrentWord))
+	{
+		// build entry value from existing letters excluding separators
+		var entry = "";
+		for (var p=0;p<WordLength[CurrentWord];p++) {
+		  if (ExpectedChar(CurrentWord,p) === ' ') continue;
+		  var tc = (CurrentWord <= LastHorizontalWord) ? CellAt(WordX[CurrentWord]+p, WordY[CurrentWord]) : CellAt(WordX[CurrentWord], WordY[CurrentWord]+p);
+		  entry += (tc && tc.innerHTML) ? tc.innerHTML.replace(/&AMP;/g,'&') : "";
+		}
+		document.getElementById("wordentry").value = entry;
+	}
 	else
 		document.getElementById("wordentry").value = "";
 	
@@ -511,6 +578,7 @@ function SelectThisWord(event)
 }
 
 // Called when the user clicks the OK link.
+// UPDATED: respects separator cells (spaces) — users type only letters, separators remain blocks.
 function OKClick()
 {
 	var TheirWord, x, y, i, TableCell;
@@ -530,32 +598,48 @@ function OKClick()
 		document.getElementById("worderror").style.display = "block";
 		return;
 	}
-	if (TheirWord.length < WordLength[CurrentWord])
+
+	// Required number of typed letters (exclude separators)
+	var requiredLetters = LettersInWord(CurrentWord);
+	if (TheirWord.length < requiredLetters)
 	{
-		document.getElementById("worderror").innerHTML  = "You did not type enough letters.  This word has " + WordLength[CurrentWord] + " letters.";
+		document.getElementById("worderror").innerHTML  = "You did not type enough letters.  This word requires " + requiredLetters + " letters (excluding separators).";
 		document.getElementById("worderror").style.display = "block";
 		return;
 	}
-	if (TheirWord.length > WordLength[CurrentWord])
+	if (TheirWord.length > requiredLetters)
 	{
-		document.getElementById("worderror").innerHTML = "You typed too many letters.  This word has " + WordLength[CurrentWord] + " letters.";
+		document.getElementById("worderror").innerHTML = "You typed too many letters.  This word requires " + requiredLetters + " letters (excluding separators).";
 		document.getElementById("worderror").style.display = "block";
 		return;
 	}
 	
-	// If we made it this far, they typed an acceptable word, so add these letters to the puzzle and hide the entry box.
+	// If we made it this far, they typed an acceptable word: write letters into cells, skipping separators.
 	x = WordX[CurrentWord];
 	y = WordY[CurrentWord];
-	for (i = 0; i < TheirWord.length; i++)
+	var letterIndex = 0;
+	for (i = 0; i < WordLength[CurrentWord]; i++)
 	{
 		TableCell = CellAt(x + (CurrentWord <= LastHorizontalWord ? i : 0), y + (CurrentWord > LastHorizontalWord ? i : 0));
-		TableCell.innerHTML = TheirWord.substring(i, i + 1);
+		if (ExpectedChar(CurrentWord, i) === ' ') {
+		  // keep separator cell as separator
+		  if (TableCell) {
+		    TableCell.innerHTML = "&nbsp;";
+		    // ensure it has separator style
+		    if (TableCell.className.indexOf("sep-cell") < 0) TableCell.className = TableCell.className + " sep-cell";
+		  }
+		  continue;
+		}
+		// Put next letter
+		var putChar = TheirWord.substring(letterIndex, letterIndex+1);
+		letterIndex++;
+		if (TableCell) TableCell.innerHTML = putChar;
 	}
 	DeselectCurrentWord();
 }
 
 // Called when the "check puzzle" link is clicked.
-// UPDATED: uses direct normalized string comparison rather than hash to support PROJECTCHARTER change
+// UPDATED: skips separator cells when checking for emptiness and correctness
 function CheckClick()
 {
 	var i, j, x, y, UserEntry, ErrorsFound = 0, EmptyFound = 0, TableCell;
@@ -572,28 +656,29 @@ function CheckClick()
 		
 	for (i = 0; i < Words; i++)
 	{
-		// Get the user's entry for this word.
+		// Get the user's entry for this word, skipping separator positions.
 		UserEntry = "";
 		for (j = 0; j < WordLength[i]; j++)
 		{
+			// If this position is a separator, skip it
+			if (ExpectedChar(i,j) === ' ') continue;
+
 			if (i <= LastHorizontalWord)
 				TableCell = CellAt(WordX[i] + j, WordY[i]);
 			else
 				TableCell = CellAt(WordX[i], WordY[i] + j);
-			if (TableCell.innerHTML.length > 0 && TableCell.innerHTML.toLowerCase() != "&nbsp;")
-			{
-				UserEntry += TableCell.innerHTML.toUpperCase();
-			}
-			else
+
+			if (!TableCell || TableCell.innerHTML.length == 0 || TableCell.innerHTML.toLowerCase() === "&nbsp;")
 			{
 				UserEntry = "";
 				EmptyFound++;
 				break;
 			}
+			UserEntry += TableCell.innerHTML.toUpperCase();
 		}
 		UserEntry = UserEntry.replace(/&AMP;/g, '&');
 
-		// Normalize expected & user: remove non-letters so space changes don't break validation
+		// Normalize expected & user: remove non-letters so separators don't break validation
 		var expected = (Word[i] || "").toUpperCase().replace(/[^A-Z]/g, '');
 		var userNorm = UserEntry.replace(/[^A-Z]/g, '');
 		if (userNorm.length > 0 && expected !== userNorm)
@@ -639,7 +724,7 @@ function CheatClick()
 	return;
 }
 
-// Returns a one-way hash for a word (kept for compatibility with older code but not used for validation here).
+// Returns a one-way hash for a word (kept for compatibility but not used for validation).
 function HashWord(Word)
 {
 	var x = (Word.charCodeAt(0) * 719) % 1138;
@@ -661,12 +746,17 @@ function PrepareSubmission() {
       if (!cell) {
         row += "#";
       } else {
-        var ch = cell.innerHTML;
-        if (!ch || ch === "&nbsp;" || ch === " ") {
-          ch = ".";
+        // For separator cells, keep a special char in grid data (we'll use '.' for empty, '#' for black, and '*' for separator)
+        if (cell.className && cell.className.indexOf("sep-cell") >= 0) {
+          row += "*";
+        } else {
+          var ch = cell.innerHTML;
+          if (!ch || ch === "&nbsp;" || ch === " ") {
+            ch = ".";
+          }
+          ch = ch.replace(/&AMP;/g, "&");
+          row += ch;
         }
-        ch = ch.replace(/&AMP;/g, "&");
-        row += ch;
       }
     }
     rows.push(row);
@@ -678,21 +768,21 @@ function PrepareSubmission() {
     gridField.value = rows.join("\n");
   }
 
-  // Validate words (same comparison logic as CheckClick)
+  // Validate words (skip separator positions)
   var ErrorsFound = 0, EmptyFound = 0;
   var UserEntry, TableCell;
   for (var i = 0; i < Words; i++) {
     UserEntry = "";
     for (var j = 0; j < WordLength[i]; j++) {
+      if (ExpectedChar(i,j) === ' ') continue;
       if (i <= LastHorizontalWord) TableCell = CellAt(WordX[i] + j, WordY[i]);
       else TableCell = CellAt(WordX[i], WordY[i] + j);
-      if (TableCell && TableCell.innerHTML.length > 0 && TableCell.innerHTML.toLowerCase() != "&nbsp;") {
-        UserEntry += TableCell.innerHTML.toUpperCase();
-      } else {
+      if (!TableCell || TableCell.innerHTML.length == 0 || TableCell.innerHTML.toLowerCase() == "&nbsp;") {
         UserEntry = "";
         EmptyFound++;
         break;
       }
+      UserEntry += TableCell.innerHTML.toUpperCase();
     }
     UserEntry = UserEntry.replace(/&AMP;/g, '&');
     var expected = (Word[i] || "").toUpperCase().replace(/[^A-Z]/g, '');
