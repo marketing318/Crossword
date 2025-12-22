@@ -1,885 +1,220 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>#EBMPPPM Crossword 1</title>
+<title>#EBMPPPM2026 Crossword 2</title>
 <meta name="generator" content="EclipseCrossword" />
-<style type="text/css"><!--
 
-body, h1, h2, h3, h4, h5, h6
-{
-	font-family: "Segoe UI", "Franklin Gothic Medium", "Arial", sans-serif;
+<style type="text/css">
+body, h1, h2, h3 {
+	font-family: "Segoe UI", Arial, sans-serif;
+}
+h1 { color: #5d6a86; }
+
+.ecw-answerbox {
+	background:#FFFAF0;
+	border:1px solid #808080;
+	padding:.75em;
+	width:240pt;
+	margin-bottom:1em;
 }
 
-h1, h2, h3, h4, h5, h6
-{
-	color: #5d6a86;
+.ecw-box {
+	border:1pt solid #606060;
+	cursor:pointer;
+	font-size:.12in;
+	font-weight:bold;
+	height:.18in;
+	width:.18in;
+	text-align:center;
 }
 
-body
-{
-	cursor: default;
-	font-size: small;
+.ecw-boxnormal_unsel { background:#fff; }
+.ecw-boxnormal_sel { background:#FFF1D7; border-color:#C00000; }
+
+.ecw-crosswordarea {
+	background:#D0D8E0;
+	border:2px solid #808080;
+	padding:.5em;
 }
 
-.ecw-answerbox
-{
-	color: black;
-	background-color: #FFFAF0;
-	border-color: #808080;
-	border-style: solid;
-	border-width: 1px;
-	display: block;
-	padding: .75em;
-	width: 240pt;
-}
+.ecw-input { width:95%; padding:4px; }
 
-.ecw-box
-{
-	border-style: solid;
-	border-width: 1pt;
-	cursor: pointer;
-	font-size: .12in;
-	font-weight: bold;
-	height: .18in;
-	overflow: hidden;
-	text-align: center;
-	width: .18in;
-}
-
-.ecw-boxcheated_sel
-{
-	background-color: #FFF1D7;
-	border-color: #C00000;
-	color: #2080D0;
-}
-
-.ecw-boxcheated_unsel
-{
-	background-color: #ffffff;
-	border-color: #606060;
-	color: #2080D0;
-}
-
-.ecw-boxerror_sel
-{
-	background-color: #FFF1D7;
-	border-color: #C00000;
-	color: #BF0000;
-}
-
-.ecw-boxerror_unsel
-{
-	background-color: #FFF0F0;
-	border-color: #606060;
-	color: #BF0000;
-}
-
-.ecw-boxnormal_sel
-{
-	background-color: #FFF1D7;
-	border-color: #C00000;
-	color: #000000;
-}
-
-.ecw-boxnormal_unsel
-{
-	background-color: #ffffff;
-	border-color: #606060;
-	color: #000000;
-}
-
-.ecw-button
-{
-	width: 64pt;
-}
-
-.ecw-cluebox
-{
-	border-bottom-width: 1px;
-	border-color: #c0c0c0;
-	border-left-width: 0px;
-	border-right-width: 0px;
-	border-style: solid;
-	border-top-width: 1px;
-	margin-top: 1em;
-	padding-bottom: .5em;
-	padding-left: 0pt;
-	padding-right: 0pt;
-	padding-top: .5em;
-}
-
-.ecw-crosswordarea
-{
-	background-color: #D0D8E0;
-	border-color: #808080;
-	border-style: solid;
-	border-width: 2px;
-	padding: .5em;
-	font-family: "Segoe UI", "Verdana", "Arial", sans-serif;
-	font-size: small;
-}
-
-.ecw-copyright
-{
-	margin-bottom: 1em;
-	font-size: x-small;
-	font-family: "Segoe UI", "Franklin Gothic Medium", "Arial", sans-serif;
-}
-
-.ecw-input
-{
-	font-family: "Segoe UI", "Verdana", "Arial", sans-serif;
-}
-
-.ecw-wordlabel
-{
-	text-transform: uppercase;
-	margin: 0;
-}
-
-.ecw-wordinfo
-{
-	font-size: 8pt;
-	color: #808080;
-}
-
-.ecw-worderror
-{
-	color: #c00000;
-	font-weight: bold;
-	display: none;
-	margin-top: 1em;
-}
-
-.hint-cell {
-  /* slight emphasis for revealed letters */
-  font-weight: bold;
-}
-
-/* separator cell style (the space between PROJECT and CHARTER) */
-.sep-cell {
-  background-color: #606060 !important;
-  color: white !important;
-  font-weight: bold;
-}
-
-/* ensure separator visually centered */
-.sep-cell::after { content: "■"; display:block; line-height:1; }
-
---></style>
-
+#cheatbutton { display:none !important; }
+</style>
 </head>
+
 <body>
 
-<!-- ✅ FORM WRAPS WHOLE PAGE AND POSTS TO YOUR SCRIPT -->
 <form
-  id="crossword-form"
   action="https://script.google.com/macros/s/AKfycby4BkSU3pfFdBDK5MLIkFEU4MZ1gxEgviDsC6os-NIK4En9J2XcTfOEuyS5PJUzT6Fi/exec"
   method="POST"
   onsubmit="return PrepareSubmission();"
 >
 
-<h1>#EBMPPPM Crossword 1</h1>
-<h3 style="margin-top: -1em;"></h3>
+<h1>#EBMPPPM2026 Crossword 2</h1>
 
-<!-- ✅ PLAYER INFO -->
-<div class="ecw-answerbox" style="margin-bottom: 1em;">
-	<h3 style="margin-top: 0;">Your details</h3>
-	<p>
-		<label>
-			Name:<br />
-			<input type="text" name="player_name" required class="ecw-input" />
-		</label>
-	</p>
-	<p>
-		<label>
-			Email:<br />
-			<input type="email" name="player_email" required class="ecw-input" />
-		</label>
-	</p>
+<!-- USER DETAILS -->
+<div class="ecw-answerbox">
+	<h3>Your Details</h3>
+	<label>Name<br />
+	<input type="text" name="player_name" required class="ecw-input" /></label><br /><br />
+	<label>Email<br />
+	<input type="email" name="player_email" required class="ecw-input" /></label>
 
-	<!-- Hidden fields where we store crossword data before submit -->
 	<input type="hidden" name="grid_data" id="grid_data" />
 	<input type="hidden" name="is_complete" id="is_complete" />
 </div>
 
-<div id="waitmessage" class="ecw-answerbox">
-	This interactive crossword puzzle requires JavaScript and any 
-	recent web browser, including Windows Internet Explorer, Mozilla Firefox, Google Chrome, or 
-	Apple Safari.  If you have disabled web page scripting, please re-enable it and refresh
-	the page.  If this web page is saved on your computer, you may need to click the yellow Information Bar at the top or bottom of
-	the page to allow the puzzle to load.
-</div>
+<div id="waitmessage" class="ecw-answerbox">Loading crossword…</div>
 
-<table cellpadding="0" cellspacing="0" border="0"><tr>
-
+<table><tr>
 <td class="ecw-crosswordarea">
 
-<script type="text/javascript"><!--
-	CrosswordWidth = 17;
-	CrosswordHeight = 19;
-	Words = 10;
-	/* RESTORED: PROJECT CHARTER with space; length = 15 */
-	WordLength = new Array(10, 13, 15, 9, 14, 6, 13, 7, 6, 9);
-	Word = new Array("MITIGATION", "RETROSPECTIVE", "PROJECT CHARTER", "POTENTIAL", "PRIORITIZATION", "BUDGET", "COMMUNICATION", "MANAGER", "DELAYS", "PORTFOLIO");
-	Clue = new Array("A proactive plan designed to reduce the likelihood or impact of identified risks", 
-"A structured review session held after project completion to analyse wins, misses, and lessons learned", 
-"The foundational document that authorizes a project and defines scope, objectives, and stakeholders", 
-"A type of risk category describing something that could happen but hasn’t yet occurred", 
-"The decision-making process used to choose which projects should be approved, funded, or executed first", 
-"The financial plan that determines how much a project can spend", 
-"The single most commonly cited root cause behind project failures when it breaks down", 
-"The individual responsible for guiding the team and ensuring project goals are met", 
-"What we call schedule slippages that push project timelines beyond the planned finish date", 
-"A group of projects or products managed together to achieve strategic goals");
-	/* Keep AnswerHash for compatibility (we'll validate by normalized strings instead). */
-	AnswerHash = new Array(13943, 93332, 42754, 70371, 82094, 87613, 80992, 12665, 48221, 58651);
-	WordX = new Array(4, 4, 0, 1, 0, 8, 12, 4, 16, 2);
-	WordY = new Array(3, 9, 11, 15, 17, 0, 2, 3, 8, 10);
-	LastHorizontalWord = 4;
-	OnlyCheckOnce = false;
-//-->
+<script type="text/javascript">
+CrosswordWidth=14; CrosswordHeight=15; Words=10;
+WordLength=[8,7,8,8,10,8,6,9,4,6];
+Word=["BASELINE","WARNING","STEERING","VARIANCE","GOVERNANCE","CAPACITY","REVIEW","OWNERSHIP","GATE","METRIC"];
+Clue=[
+"The approved reference used to compare planned vs actual scope, cost, or schedule",
+"An early sign that a project may face problems later",
+"Senior group that reviews progress and resolves escalated issues",
+"The gap between what was planned and what actually happened",
+"Rules and structure that define who decides what in projects",
+"The maximum amount of work a team can realistically handle",
+"A formal check to decide whether a project should continue",
+"Being clearly responsible for results",
+"A formal go / no-go checkpoint",
+"A number used to track project performance"
+];
+AnswerHash=[93122,36341,78076,46935,10042,65724,69972,89358,82192,38512];
+WordX=[0,3,4,5,4,1,3,8,6,12];
+WordY=[1,5,7,10,14,0,0,3,9,9];
+LastHorizontalWord=4;
+OnlyCheckOnce=false;
 </script>
 
-<script type="text/javascript"><!--
+<script type="text/javascript">
+var TableAcrossWord=[],TableDownWord=[];
+var CurrentWord=-1,PrevWordHorizontal=false,CrosswordFinished=false;
 
-// EclipseCrossword core with space-aware logic
+function PadNumber(n){return(n<10?"00":n<100?"0":"")+n;}
+function CellAt(x,y){return document.getElementById("c"+PadNumber(x)+PadNumber(y));}
 
-var BadChars = "`~!@^*()_={[}]\\|:;\"',<>/?";
-
-var TableAcrossWord, TableDownWord;
-var CurrentWord, PrevWordHorizontal, x, y, i, j;
-var CrosswordFinished, Initialized;
-
-// Helper: return expected character at position p of word windex (uppercase). Could be space.
-function ExpectedChar(wordIndex, pos) {
-  var w = (Word[wordIndex] || "").toUpperCase();
-  if (pos < 0 || pos >= w.length) return '';
-  return w.charAt(pos);
-}
-
-// Count number of letters (non-space A-Z) in a word
-function LettersInWord(wordIndex) {
-  var w = (Word[wordIndex] || "").toUpperCase();
-  var count = 0;
-  for (var k=0;k<w.length;k++) if (/[A-Z]/.test(w.charAt(k))) count++;
-  return count;
-}
-
-// Check the user's browser and then initialize the puzzle.
-if (document.getElementById("waitmessage") != null)
-{
-	document.getElementById("waitmessage").innerHTML = "Please wait while the crossword is loaded...";
-	
-	// Current game variables
-	CurrentWord = -1;
-	PrevWordHorizontal = false;
-	
-	// Create the cell-to-word arrays.
-	TableAcrossWord = new Array(CrosswordWidth);
-	for (var x = 0; x < CrosswordWidth; x++) TableAcrossWord[x] = new Array(CrosswordHeight);
-	TableDownWord = new Array(CrosswordWidth);
-	for (var x = 0; x < CrosswordWidth; x++) TableDownWord[x] = new Array(CrosswordHeight);
-	for (var y = 0; y < CrosswordHeight; y++)
-		for (var x = 0; x < CrosswordWidth; x++)
-		{
-			TableAcrossWord[x][y] = -1;
-			TableDownWord[x][y] = -1;
-		}
-	
-	// First, add the horizontal words to the puzzle.
-	for (var i = 0; i <= LastHorizontalWord; i++)
-	{
-		x = WordX[i];
-		y = WordY[i];
-		for (var j = 0; j < WordLength[i]; j++)
-		{
-			TableAcrossWord[x + j][y] = i;
+(function(){
+	for(let x=0;x<CrosswordWidth;x++){
+		TableAcrossWord[x]=[]; TableDownWord[x]=[];
+		for(let y=0;y<CrosswordHeight;y++){
+			TableAcrossWord[x][y]=-1; TableDownWord[x][y]=-1;
 		}
 	}
-	
-	// Second, add the vertical words to the puzzle.
-	for (var i = LastHorizontalWord + 1; i < Words; i++)
-	{
-		x = WordX[i];
-		y = WordY[i];
-		for (var j = 0; j < WordLength[i]; j++)
-		{
-			TableDownWord[x][y + j] = i;
+	for(let i=0;i<=LastHorizontalWord;i++)
+		for(let j=0;j<WordLength[i];j++)
+			TableAcrossWord[WordX[i]+j][WordY[i]]=i;
+
+	for(let i=LastHorizontalWord+1;i<Words;i++)
+		for(let j=0;j<WordLength[i];j++)
+			TableDownWord[WordX[i]][WordY[i]+j]=i;
+
+	document.write('<table id="crossword" style="display:none;border-collapse:collapse">');
+	for(let y=0;y<CrosswordHeight;y++){
+		document.write("<tr>");
+		for(let x=0;x<CrosswordWidth;x++){
+			if(TableAcrossWord[x][y]>=0||TableDownWord[x][y]>=0)
+				document.write('<td id="c'+PadNumber(x)+PadNumber(y)+'" class="ecw-box ecw-boxnormal_unsel" onclick="SelectThisWord(event)">&nbsp;</td>');
+			else document.write("<td></td>");
 		}
+		document.write("</tr>");
 	}
-	
-	// Now, insert the crossword table.
-	document.writeln("<table id=\"crossword\" cellpadding=\"0\" cellspacing=\"0\" style=\"display: none; border-collapse: collapse;\">");
-	for (var y = 0; y < CrosswordHeight; y++)
-	{
-		document.writeln("<tr>");
-		for (var x = 0; x < CrosswordWidth; x++)
-		{
-			if (TableAcrossWord[x][y] >= 0 || TableDownWord[x][y] >= 0)
-				document.write("<td id=\"c" + PadNumber(x) + PadNumber(y) + "\" class=\"ecw-box ecw-boxnormal_unsel\" onclick=\"SelectThisWord(event);\">&nbsp;</td>");
-			else
-				document.write("<td><\/td>");
-		}
-		document.writeln("<\/tr>");
-	}
-	document.writeln("<\/table>");
-	
-	// Reveal one letter per word (safe hint). Skip spaces; also mark separator cell style if needed.
-	function RevealHints() {
-		for (var wi = 0; wi < Words; wi++) {
-			var w = Word[wi] || "";
-			if (!w) continue;
-			// Choose a middle index, but skip spaces
-			var idx = Math.floor(w.length / 2);
-			if (w.charAt(idx) === ' ') {
-				var found = -1;
-				for (var d = 1; d < w.length; d++) {
-					if (idx - d >= 0 && w.charAt(idx - d) !== ' ') { found = idx - d; break; }
-					if (idx + d < w.length && w.charAt(idx + d) !== ' ') { found = idx + d; break; }
-				}
-				if (found >= 0) idx = found;
-				else {
-					for (var t = 0; t < w.length; t++) { if (w.charAt(t) !== ' ') { idx = t; break; } }
-				}
-			}
-			var ch = w.charAt(idx).toUpperCase();
-			var sx = WordX[wi], sy = WordY[wi];
-			var cell;
-			if (wi <= LastHorizontalWord)
-				cell = CellAt(sx + idx, sy);
-			else
-				cell = CellAt(sx, sy + idx);
-			if (cell) {
-				// If this position is a space (separator), style the cell as separator rather than put a letter
-				if (ExpectedChar(wi, idx) === ' ') {
-					cell.innerHTML = "&nbsp;";
-					cell.className = cell.className + " sep-cell";
-				} else {
-					cell.innerHTML = ch;
-					cell.className = cell.className + " hint-cell";
-				}
-			}
-		}
-	}
+	document.write("</table>");
 
-	// Additionally, mark any separator cells (space positions) in the full grid so they are visible immediately.
-	function MarkSeparators() {
-		for (var wi = 0; wi < Words; wi++) {
-			for (var p = 0; p < WordLength[wi]; p++) {
-				if (ExpectedChar(wi, p) === ' ') {
-					var sx = WordX[wi], sy = WordY[wi];
-					var sepCell;
-					if (wi <= LastHorizontalWord)
-						sepCell = CellAt(sx + p, sy);
-					else
-						sepCell = CellAt(sx, sy + p);
-					if (sepCell) {
-						sepCell.innerHTML = "&nbsp;";
-						sepCell.className = sepCell.className + " sep-cell";
-					}
-				}
-			}
-		}
-	}
-
-	// Finally, show the crossword and hide the wait message.
-	Initialized = true;
-	// Mark separators first (so hint doesn't override separator), then reveal letter hints
-	MarkSeparators();
-	RevealHints();
-	document.getElementById("waitmessage").style.display = "none";
-	document.getElementById("crossword").style.display = "block";
-}
-
-// * * * * * * * * * *
-// Event handlers
-
-// Raised when a key is pressed in the word entry box.
-function WordEntryKeyPress(event)
-{
-	if (CrosswordFinished) return;
-	// Treat an Enter keypress as an OK click.
-	if (CurrentWord >= 0 && event.keyCode == 13) OKClick();
-}
-
-// * * * * * * * * * *
-// Helper functions
-
-// Called when we're ready to start the crossword.
-function BeginCrossword()
-{
-	if (Initialized)
-	{
-		document.getElementById("welcomemessage").style.display = "";
-		document.getElementById("checkbutton").style.display = "";
-	}
-}
-
-// Returns true if the string passed in contains any characters prone to evil.
-function ContainsBadChars(theirWord)
-{
-	for (var i = 0; i < theirWord.length; i++)
-		if (BadChars.indexOf(theirWord.charAt(i)) >= 0) return true;
-	return false;
-}
-
-// Pads a number out to three characters.
-function PadNumber(number)
-{
-	if (number < 10)
-		return "00" + number;
-	else if (number < 100)
-		return "0" + number;
-	else
-		return "" +  number;
-}
-
-// Returns the table cell at a particular pair of coordinates.
-function CellAt(x, y)
-{
-	return document.getElementById("c" + PadNumber(x) + PadNumber(y));
-}
-
-// Deselects the current word, if there's a word selected.  DOES not change the value of CurrentWord.
-function DeselectCurrentWord()
-{
-	if (CurrentWord < 0) return;
-	var x, y, i;
-	
-	document.getElementById("answerbox").style.display = "none";
-	ChangeCurrentWordSelectedStyle(false);
-	CurrentWord = -1;
-	
-}
-
-// Changes the style of the cells in the current word.
-function ChangeWordStyle(WordNumber, NewStyle)
-{
-	if (WordNumber< 0) return;
-	var x = WordX[WordNumber];
-	var y = WordY[WordNumber];
-	
-	if (WordNumber<= LastHorizontalWord)
-		for (i = 0; i < WordLength[WordNumber]; i++)
-			CellAt(x + i, y).className = NewStyle;
-	else
-		for (i = 0; i < WordLength[WordNumber]; i++)
-			CellAt(x, y + i).className = NewStyle;
-}
-
-// Changes the style of the cells in the current word between the selected/unselected form.
-function ChangeCurrentWordSelectedStyle(IsSelected)
-{
-	if (CurrentWord < 0) return;
-	var x = WordX[CurrentWord];
-	var y = WordY[CurrentWord];
-	
-	if (CurrentWord <= LastHorizontalWord)
-		for (i = 0; i < WordLength[CurrentWord]; i++)
-			CellAt(x + i, y).className = CellAt(x + i, y).className.replace(IsSelected ? "_unsel" : "_sel", IsSelected ? "_sel" : "_unsel");
-	else
-		for (i = 0; i < WordLength[CurrentWord]; i++)
-			CellAt(x, y + i).className = CellAt(x, y + i).className.replace(IsSelected ? "_unsel" : "_sel", IsSelected ? "_sel" : "_unsel");
-}
-
-// Selects the new word by parsing the name of the TD element referenced by the 
-// event object, and then applying styles as necessary.
-function SelectThisWord(event)
-{
-	if (CrosswordFinished) return;
-	var x, y, i, TheirWord, TableCell;
-	
-	// Deselect the previous word if one was selected.
-	document.getElementById("welcomemessage").style.display = "none";
-	if (CurrentWord >= 0) OKClick();
-	DeselectCurrentWord();
-	
-	// Determine the coordinates of the cell they clicked, and then the word that
-	// they clicked.
-	var target = (event.srcElement ? event.srcElement: event.target);
-	x = parseInt(target.id.substring(1, 4), 10);
-	y = parseInt(target.id.substring(4, 7), 10);
-	
-	// If they clicked an intersection, choose the type of word that was NOT selected last time.
-	if (TableAcrossWord[x][y] >= 0 && TableDownWord[x][y] >= 0)
-		CurrentWord = PrevWordHorizontal ? TableDownWord[x][y] : TableAcrossWord[x][y];
-	else if (TableAcrossWord[x][y] >= 0)
-		CurrentWord = TableAcrossWord[x][y];
-	else if (TableDownWord[x][y] >= 0)
-		CurrentWord = TableDownWord[x][y];
-
-	PrevWordHorizontal = (CurrentWord <= LastHorizontalWord);
-	
-	// Now, change the style of the cells in this word.
-	ChangeCurrentWordSelectedStyle(true);
-	
-	// Then, prepare the answer box.
-	x = WordX[CurrentWord];
-	y = WordY[CurrentWord];
-	TheirWord = "";
-	var TheirWordLength = 0;
-	for (i = 0; i < WordLength[CurrentWord]; i++)
-	{
-		// Find the appropriate table cell.
-		if (CurrentWord <= LastHorizontalWord)
-			TableCell = CellAt(x + i, y);
-		else
-			TableCell = CellAt(x, y + i);
-		// Add its contents to the word we're building.
-		// If this position is a separator (space) show a block char and don't count as a letter
-		if (ExpectedChar(CurrentWord, i) === ' ')
-		{
-			TheirWord += "■";
-		}
-		else if (TableCell.innerHTML != null && TableCell.innerHTML.length > 0 && TableCell.innerHTML != " " && TableCell.innerHTML.toLowerCase() != "&nbsp;")
-		{
-			TheirWord += TableCell.innerHTML.toUpperCase();
-			TheirWordLength++;
-		}
-		else
-		{
-			TheirWord += "&bull;";
-		}
-	}
-	
-	document.getElementById("wordlabel").innerHTML = TheirWord;
-	document.getElementById("wordinfo").innerHTML = ((CurrentWord <= LastHorizontalWord) ? "Across, " : "Down, ") + WordLength[CurrentWord] + " letters. (■ = separator)";
-	document.getElementById("wordclue").innerHTML = Clue[CurrentWord];
-	document.getElementById("worderror").style.display = "none";
-	/* Force the cheat button to remain hidden so users cannot reveal answers. */
-	try { document.getElementById("cheatbutton").style.display = "none"; } catch(e){}
-	// If the number of typed letters equals the required letter count (excluding spaces), prefill entry box
-	if (TheirWordLength == LettersInWord(CurrentWord))
-	{
-		// build entry value from existing letters excluding separators
-		var entry = "";
-		for (var p=0;p<WordLength[CurrentWord];p++) {
-		  if (ExpectedChar(CurrentWord,p) === ' ') continue;
-		  var tc = (CurrentWord <= LastHorizontalWord) ? CellAt(WordX[CurrentWord]+p, WordY[CurrentWord]) : CellAt(WordX[CurrentWord], WordY[CurrentWord]+p);
-		  entry += (tc && tc.innerHTML) ? tc.innerHTML.replace(/&AMP;/g,'&') : "";
-		}
-		document.getElementById("wordentry").value = entry;
-	}
-	else
-		document.getElementById("wordentry").value = "";
-	
-	// Finally, show the answer box.
-	document.getElementById("answerbox").style.display = "block";
-	try
-	{
-		document.getElementById("wordentry").focus();
-		document.getElementById("wordentry").select();
-	}
-	catch (e)
-	{
-	}
-	
-}
-
-// Called when the user clicks the OK link.
-// UPDATED: respects separator cells (spaces) — users type only letters, separators remain blocks.
-function OKClick()
-{
-	var TheirWord, x, y, i, TableCell;
-	if (CrosswordFinished) return;
-	if (document.getElementById("okbutton").disabled) return;
-	
-	// First, validate the entry.
-	TheirWord = document.getElementById("wordentry").value.toUpperCase();
-	if (TheirWord.length == 0)
-	{
-		DeselectCurrentWord();
-		return;
-	}
-	if (ContainsBadChars(TheirWord))
-	{
-		document.getElementById("worderror").innerHTML = "The word that you typed contains invalid characters.  Please type only letters in the box above.";
-		document.getElementById("worderror").style.display = "block";
-		return;
-	}
-
-	// Required number of typed letters (exclude separators)
-	var requiredLetters = LettersInWord(CurrentWord);
-	if (TheirWord.length < requiredLetters)
-	{
-		document.getElementById("worderror").innerHTML  = "You did not type enough letters.  This word requires " + requiredLetters + " letters (excluding separators).";
-		document.getElementById("worderror").style.display = "block";
-		return;
-	}
-	if (TheirWord.length > requiredLetters)
-	{
-		document.getElementById("worderror").innerHTML = "You typed too many letters.  This word requires " + requiredLetters + " letters (excluding separators).";
-		document.getElementById("worderror").style.display = "block";
-		return;
-	}
-	
-	// If we made it this far, they typed an acceptable word: write letters into cells, skipping separators.
-	x = WordX[CurrentWord];
-	y = WordY[CurrentWord];
-	var letterIndex = 0;
-	for (i = 0; i < WordLength[CurrentWord]; i++)
-	{
-		TableCell = CellAt(x + (CurrentWord <= LastHorizontalWord ? i : 0), y + (CurrentWord > LastHorizontalWord ? i : 0));
-		if (ExpectedChar(CurrentWord, i) === ' ') {
-		  // keep separator cell as separator
-		  if (TableCell) {
-		    TableCell.innerHTML = "&nbsp;";
-		    // ensure it has separator style
-		    if (TableCell.className.indexOf("sep-cell") < 0) TableCell.className = TableCell.className + " sep-cell";
-		  }
-		  continue;
-		}
-		// Put next letter
-		var putChar = TheirWord.substring(letterIndex, letterIndex+1);
-		letterIndex++;
-		if (TableCell) TableCell.innerHTML = putChar;
-	}
-	DeselectCurrentWord();
-}
-
-// Called when the "check puzzle" link is clicked.
-// UPDATED: skips separator cells when checking for emptiness and correctness
-function CheckClick()
-{
-	var i, j, x, y, UserEntry, ErrorsFound = 0, EmptyFound = 0, TableCell;
-	if (CrosswordFinished) return;
-	DeselectCurrentWord();
-	
-	for (y = 0; y < CrosswordHeight; y++)
-	for (x = 0; x < CrosswordWidth; x++)
-		if (TableAcrossWord[x][y] >= 0 || TableDownWord[x][y] >= 0)
-		{
-			TableCell = CellAt(x, y);
-			if (TableCell.className == "ecw-box ecw-boxerror_unsel") TableCell.className = "ecw-box ecw-boxnormal_unsel";
-		}
-		
-	for (i = 0; i < Words; i++)
-	{
-		// Get the user's entry for this word, skipping separator positions.
-		UserEntry = "";
-		for (j = 0; j < WordLength[i]; j++)
-		{
-			// If this position is a separator, skip it
-			if (ExpectedChar(i,j) === ' ') continue;
-
-			if (i <= LastHorizontalWord)
-				TableCell = CellAt(WordX[i] + j, WordY[i]);
-			else
-				TableCell = CellAt(WordX[i], WordY[i] + j);
-
-			if (!TableCell || TableCell.innerHTML.length == 0 || TableCell.innerHTML.toLowerCase() === "&nbsp;")
-			{
-				UserEntry = "";
-				EmptyFound++;
-				break;
-			}
-			UserEntry += TableCell.innerHTML.toUpperCase();
-		}
-		UserEntry = UserEntry.replace(/&AMP;/g, '&');
-
-		// Normalize expected & user: remove non-letters so separators don't break validation
-		var expected = (Word[i] || "").toUpperCase().replace(/[^A-Z]/g, '');
-		var userNorm = UserEntry.replace(/[^A-Z]/g, '');
-		if (userNorm.length > 0 && expected !== userNorm)
-		{
-			ErrorsFound++;
-			ChangeWordStyle(i, "ecw-box ecw-boxerror_unsel");
-		}
-	}
-	
-	// If they can only check once, disable things prematurely.
-	if ( OnlyCheckOnce )
-	{
-		CrosswordFinished = true;
-		document.getElementById("checkbutton").style.display = "none";
-	}
-	
-	// If errors were found, just exit now.
-	if (ErrorsFound > 0 && EmptyFound > 0)
-		document.getElementById("welcomemessage").innerHTML = ErrorsFound + (ErrorsFound > 1 ? " errors" : " error") + " and " + EmptyFound + (EmptyFound > 1 ? " incomplete words were" : " incomplete word was") + " found.";
-	else if (ErrorsFound > 0)
-		document.getElementById("welcomemessage").innerHTML = ErrorsFound + (ErrorsFound > 1 ? " errors were" : " error was") + " found.";
-	else if (EmptyFound > 0)
-		document.getElementById("welcomemessage").innerHTML = "No errors were found, but " + EmptyFound + (EmptyFound > 1 ? " incomplete words were" : " incomplete word was") + " found.";
-	
-	if (ErrorsFound + EmptyFound > 0)
-	{
-		document.getElementById("welcomemessage").style.display = "";
-		return;
-	}
-			
-	// They finished the puzzle!
-	CrosswordFinished = true;
-	document.getElementById("checkbutton").style.display = "none";
-	document.getElementById("congratulations").style.display = "block";
-	document.getElementById("welcomemessage").style.display = "none";
-}
-
-// Called when the "cheat" link is clicked.
-// Replaced with a no-op to prevent answer reveal.
-function CheatClick()
-{
-	/* Intentionally empty to prevent showing answers. */
-	return;
-}
-
-// Returns a one-way hash for a word (kept for compatibility but not used for validation).
-function HashWord(Word)
-{
-	var x = (Word.charCodeAt(0) * 719) % 1138;
-	var Hash = 837;
-	var i;
-	for (i = 1; i <= Word.length; i++)
-		Hash = (Hash * i + 5 + (Word.charCodeAt(i - 1) - 64) * x) % 98503;
-	return Hash;
-}
-
-/* ✅ NEW: PrepareSubmission() does client-side validation and prevents accidental submit */
-function PrepareSubmission() {
-  // Build text representation of grid row by row
-  var rows = [];
-  for (var y = 0; y < CrosswordHeight; y++) {
-    var row = "";
-    for (var x = 0; x < CrosswordWidth; x++) {
-      var cell = CellAt(x, y);
-      if (!cell) {
-        row += "#";
-      } else {
-        // For separator cells, keep a special char in grid data (we'll use '.' for empty, '#' for black, and '*' for separator)
-        if (cell.className && cell.className.indexOf("sep-cell") >= 0) {
-          row += "*";
-        } else {
-          var ch = cell.innerHTML;
-          if (!ch || ch === "&nbsp;" || ch === " ") {
-            ch = ".";
-          }
-          ch = ch.replace(/&AMP;/g, "&");
-          row += ch;
-        }
-      }
-    }
-    rows.push(row);
-  }
-
-  // Put grid into hidden input
-  var gridField = document.getElementById("grid_data");
-  if (gridField) {
-    gridField.value = rows.join("\n");
-  }
-
-  // Validate words (skip separator positions)
-  var ErrorsFound = 0, EmptyFound = 0;
-  var UserEntry, TableCell;
-  for (var i = 0; i < Words; i++) {
-    UserEntry = "";
-    for (var j = 0; j < WordLength[i]; j++) {
-      if (ExpectedChar(i,j) === ' ') continue;
-      if (i <= LastHorizontalWord) TableCell = CellAt(WordX[i] + j, WordY[i]);
-      else TableCell = CellAt(WordX[i], WordY[i] + j);
-      if (!TableCell || TableCell.innerHTML.length == 0 || TableCell.innerHTML.toLowerCase() == "&nbsp;") {
-        UserEntry = "";
-        EmptyFound++;
-        break;
-      }
-      UserEntry += TableCell.innerHTML.toUpperCase();
-    }
-    UserEntry = UserEntry.replace(/&AMP;/g, '&');
-    var expected = (Word[i] || "").toUpperCase().replace(/[^A-Z]/g, '');
-    var userNorm = UserEntry.replace(/[^A-Z]/g, '');
-    if (userNorm.length > 0 && expected !== userNorm) {
-      ErrorsFound++;
-    }
-  }
-
-  // Set is_complete field (client)
-  var completeField = document.getElementById("is_complete");
-  if (completeField) {
-    completeField.value = (ErrorsFound === 0 && EmptyFound === 0) ? "1" : "0";
-  }
-
-  // If there are issues, block and warn (user may confirm to force submit)
-  if (EmptyFound > 0 && ErrorsFound > 0) {
-    var msg = "Your puzzle is incomplete (" + EmptyFound + " incomplete) and has " + ErrorsFound + " incorrect answers.\nPlease finish or correct before submitting.\n\nSubmit anyway?";
-    return confirm(msg);
-  } else if (EmptyFound > 0) {
-    var msg2 = "Your puzzle is incomplete (" + EmptyFound + " incomplete).\nPlease finish it before submitting.\n\nSubmit anyway?";
-    return confirm(msg2);
-  } else if (ErrorsFound > 0) {
-    var msg3 = "Some answers appear incorrect (" + ErrorsFound + ").\nPlease check them before submitting.\n\nSubmit anyway?";
-    return confirm(msg3);
-  }
-
-  // All good
-  return true;
-}
-
-/* END script */
+	document.getElementById("waitmessage").style.display="none";
+	document.getElementById("crossword").style.display="block";
+})();
 </script>
 
 </td>
 
-<td valign="top" style="padding-left: 1em;">
+<td valign="top" style="padding-left:1em">
 
-<div class="ecw-copyright">
-	<a href="http://www.eclipsecrossword.com/" onclick="this.target='_blank'" style="font-weight: bold;">EclipseCrossword</a> &copy; 2000-2013
-</div>
-
-<div id="welcomemessage" class="ecw-answerbox" style="display:none;">
-<h3>Welcome!</h3>
-<p>Click a word in the puzzle to get started.</p>
-</div>
-
-<div id="answerbox" class="ecw-answerbox" style="display:none;">
-<h3 id="wordlabel" class="ecw-wordlabel"> &nbsp;</h3>
-<div id="wordinfo" class="ecw-wordinfo"> </div>
-<div id="wordclue" class="ecw-cluebox"> </div>
-<div style="margin-top: 1em;">
-	<input class="ecw-input" id="wordentry" type="text" size="24" style="font-weight: bold; text-transform:uppercase;" onkeypress="WordEntryKeyPress(event)" onchange="WordEntryKeyPress(event)" />
-</div>
-<div id="worderror" class="ecw-worderror"></div>
-
-<table border="0" cellspacing="0" cellpadding="0" width="100%" style="margin-top:1em;"><tbody><tr><td>
-<!-- Solve button kept but hidden -->
-<button id="cheatbutton" type="button" class="ecw-input ecw-button" style="display:none;" onclick="CheatClick();">Solve</button>
-</td><td align="right">
-<button id="okbutton" type="button" class="ecw-input ecw-button" onclick="OKClick();" style="font-weight: bold;">OK</button> &nbsp;
-<button id="cancelbutton" type="button" class="ecw-input ecw-button" onclick="DeselectCurrentWord();">Cancel</button>
-</td></tr></tbody></table>
-
-</div>
-
-<div id="congratulations" class="ecw-answerbox" style="display:none;">
-<h3>Congratulations!</h3>
-<p>You have completed this <a href="http://www.eclipsecrossword.com" style="color: black; text-decoration:none;">crossword puzzle</a>.
-</p>
-<p>If you would like to be able to create interactive
-<a href="http://www.eclipsecrossword.com" style="color: black; text-decoration:none;">crosswords</a>
-like this yourself, get <a href="http://www.eclipsecrossword.com" onclick="this.target='_blank'">EclipseCrossword</a>
-from Green Eclipse&mdash;it's free!
-</p>
+<div id="answerbox" class="ecw-answerbox" style="display:none">
+<h3 id="wordlabel"></h3>
+<div id="wordinfo"></div>
+<div id="wordclue"></div>
+<input id="wordentry" class="ecw-input"
+onkeypress="if(event.keyCode==13)OKClick()" />
+<br /><br />
+<button type="button" onclick="OKClick()">OK</button>
+<button type="button" onclick="DeselectCurrentWord()">Cancel</button>
+<button id="cheatbutton">Solve</button>
 </div>
 
 </td></tr></table>
 
-<div style="margin-top: 1em;">
-	<button id="checkbutton" type="button" onclick="CheckClick();" style="display: none;">Check puzzle</button>
-</div>
-
-<!-- ✅ SUBMIT BUTTON -->
-<div style="margin-top: 1em;">
-	<button type="submit">Submit my answers</button>
+<!-- SUBMIT -->
+<div style="margin-top:1em;">
+<button type="submit">Submit My Answers</button>
 </div>
 
 </form>
 
-<script type="text/javascript"><!--
-BeginCrossword();
-//-->
-</script>
+<script type="text/javascript">
+function SelectThisWord(e){
+	if(CurrentWord>=0) OKClick();
+	DeselectCurrentWord();
+	var t=e.target;
+	var x=parseInt(t.id.substr(1,3));
+	var y=parseInt(t.id.substr(4,3));
+	if(TableAcrossWord[x][y]>=0&&TableDownWord[x][y]>=0)
+		CurrentWord=PrevWordHorizontal?TableDownWord[x][y]:TableAcrossWord[x][y];
+	else CurrentWord=Math.max(TableAcrossWord[x][y],TableDownWord[x][y]);
+	PrevWordHorizontal=CurrentWord<=LastHorizontalWord;
+	document.getElementById("answerbox").style.display="block";
+	document.getElementById("wordclue").innerHTML=Clue[CurrentWord];
+}
 
-<!-- Created with EclipseCrossword, (C) Copyright 2000-2013 Green Eclipse.  eclipsecrossword.com -->
+function OKClick(){
+	if(CurrentWord<0) return;
+	var w=document.getElementById("wordentry").value.toUpperCase();
+	if(w.length!==WordLength[CurrentWord]) return;
+	for(let i=0;i<w.length;i++){
+		CellAt(
+			WordX[CurrentWord]+(CurrentWord<=LastHorizontalWord?i:0),
+			WordY[CurrentWord]+(CurrentWord>LastHorizontalWord?i:0)
+		).innerHTML=w[i];
+	}
+	DeselectCurrentWord();
+}
+
+function DeselectCurrentWord(){
+	document.getElementById("answerbox").style.display="none";
+	CurrentWord=-1;
+}
+
+function PrepareSubmission(){
+	var rows=[];
+	for(let y=0;y<CrosswordHeight;y++){
+		var row="";
+		for(let x=0;x<CrosswordWidth;x++){
+			var c=CellAt(x,y);
+			row+=(!c?"#":(c.innerHTML=="&nbsp;"?".":c.innerHTML));
+		}
+		rows.push(row);
+	}
+	document.getElementById("grid_data").value=rows.join("\n");
+	document.getElementById("is_complete").value=
+		rows.join("").indexOf(".")===-1?"1":"0";
+	return true;
+}
+
+/* Reveal one letter per word */
+setTimeout(function(){
+	for(let i=0;i<Words;i++){
+		var c=CellAt(WordX[i],WordY[i]);
+		if(c&&c.innerHTML=="&nbsp;") c.innerHTML=Word[i][0];
+	}
+},300);
+</script>
 
 </body>
 </html>
-
