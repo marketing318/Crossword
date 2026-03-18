@@ -2,230 +2,200 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>#EBMGMP2026 Crossword 1</title>
-<meta name="generator" content="EclipseCrossword" />
+<title>#EBMGMP2026 Crossword 2</title>
 
-<style type="text/css">
-body, h1, h2, h3, h4, h5, h6 {
-	font-family: "Segoe UI","Franklin Gothic Medium","Arial",sans-serif;
-}
-h1 { color:#5d6a86; }
-body { font-size: small; }
-
-.ecw-answerbox {
-	background:#FFFAF0;
-	border:1px solid #808080;
-	padding:.75em;
-	width:260pt;
-	margin-bottom:1em;
-}
-
-.ecw-box {
-	border:1pt solid #606060;
-	cursor:pointer;
-	font-size:.12in;
-	font-weight:bold;
-	height:.18in;
-	width:.18in;
-	text-align:center;
-}
-
-.ecw-boxnormal_sel { background:#FFF1D7; border-color:#C00000; }
-.ecw-boxnormal_unsel { background:#ffffff; }
-
-#cheatbutton { display:none !important; } /* Hide Solve */
+<style>
+body{font-family:Segoe UI,Arial;}
+.ecw-answerbox{background:#FFFAF0;border:1px solid #808080;padding:.75em;width:260pt;margin-bottom:1em;}
+.ecw-box{border:1px solid #606060;cursor:pointer;font-weight:bold;height:.18in;width:.18in;text-align:center;}
+.ecw-boxnormal_sel{background:#FFF1D7;}
+.ecw-boxnormal_unsel{background:#fff;}
+#cheatbutton{display:none!important;}
 </style>
 </head>
 
 <body>
 
-<form
-action="https://script.google.com/macros/s/AKfycby4BkSU3pfFdBDK5MLIkFEU4MZ1gxEgviDsC6os-NIK4En9J2XcTfOEuyS5PJUzT6Fi/exec"
-method="POST"
-onsubmit="return PrepareSubmission();"
->
+<form action="https://script.google.com/macros/s/AKfycby4BkSU3pfFdBDK5MLIkFEU4MZ1gxEgviDsC6os-NIK4En9J2XcTfOEuyS5PJUzT6Fi/exec"
+method="POST" onsubmit="return PrepareSubmission();">
 
-<h1>#EBMGMP2026 Crossword 1</h1>
+<h1>#EBMGMP2026 Crossword 2</h1>
 
 <div class="ecw-answerbox">
-<h3>Your Details</h3>
+<b>Your Details</b><br><br>
 <input type="text" name="player_name" placeholder="Name" required><br><br>
 <input type="email" name="player_email" placeholder="Email" required>
 <input type="hidden" name="grid_data" id="grid_data">
 <input type="hidden" name="is_complete" id="is_complete">
 </div>
 
-<div id="waitmessage" class="ecw-answerbox">
-Loading crossword…
-</div>
+<div id="waitmessage" class="ecw-answerbox">Loading crossword…</div>
 
-<table cellpadding="0" cellspacing="0" border="0"><tr>
-<td class="ecw-crosswordarea">
+<table><tr>
+<td>
 
-<script type="text/javascript">
-CrosswordWidth = 20;
-CrosswordHeight = 20;
-Words = 17;
+<script>
+CrosswordWidth=25;
+CrosswordHeight=21;
+Words=14;
 
-WordLength = new Array(14,3,10,10,13,9,4,15,18,10,15,8,5,4,10,8,10);
+WordLength=[20,13,15,9,3,10,10,13,8,16,16,9,10,3];
 
-Word = new Array(
-"SUSTAINABILITY",
-"QRM",
-"ESCALATION",
-"VALIDATION",
-"CONTAMINATION",
-"DEVIATION",
-"CAPA",
-"AUDITREADINESS",
-"SUPPLIEROVERSIGHT",
-"INSPECTION",
-"DATAINTEGRITY",
-"METADATA",
-"ALCOA",
-"LIMS",
-"GOVERNANCE",
-"TRENDING",
-"ROOTCAUSE"
-);
+Word=[
+"PRODUCTQUALITYREVIEW","CHANGECONTROL","DOCUMENTCONTROL","ROOTCAUSE",
+"PQS","VALIDATION","CORRECTIVE","DATAINTEGRITY","TRENDING",
+"VENDORMANAGEMENT","RECURRINGFAILURE","DEVIATION","COMPLIANCE","OOT"
+];
 
-Clue = new Array(
-"Integrating environmentally responsible practices into GMP operations without compromising compliance.",
-"ICH-aligned framework used to assess, control, communicate, and review quality risks.",
-"The act of formally raising a quality issue to higher authority when risk exceeds defined thresholds.",
-"Documented evidence that a process, system, or method consistently produces expected results.",
-"Unintended introduction of impurities that can compromise product quality and patient safety.",
-"An unplanned departure from an approved process, procedure, or specification that must be investigated.",
-"A structured system used to investigate root causes and implement corrective and preventive actions to avoid recurrence.",
-"The sustained state of compliance where systems, documentation, and teams are always prepared for inspection.",
-"Monitoring and controlling external partners to ensure quality across the supply chain.",
-"A regulatory evaluation conducted by authorities such as USFDA, WHO, or CDSCO to assess GMP compliance.",
-"Ensuring that records are attributable, legible, contemporaneous, original, accurate and complete throughout the data lifecycle.",
-"Contextual data that describes other data, critical in digital systems and audit trail reviews.",
-"The foundational principles that define core data integrity expectations in GMP environments.",
-"A digital system used to manage laboratory samples, test results, audit trails, and compliance documentation.",
-"The leadership oversight and accountability structure that ensures compliance and ethical decision-making.",
-"Analysis of recurring data patterns to identify early warning signals before failures occur.",
-"The fundamental reason behind a deviation or failure, identified through structured investigation."
-);
+Clue=[
+"Documented review of system performance at regular intervals",
+"A formal system to evaluate, approve, and document changes",
+"Control of documents to ensure correct versions are in use",
+"Investigation to identify the fundamental reason behind a problem",
+"System for managing quality across processes and lifecycle",
+"Establishing documented evidence that a process performs consistently",
+"Actions taken to eliminate the cause of non-conformity",
+"Ensuring data is complete, consistent, and reliable throughout its lifecycle",
+"Analysis of data over time to detect patterns or risks",
+"Monitoring and evaluation of suppliers to ensure quality standards",
+"Repeatedly fixing issues without eliminating the real root cause",
+"Any departure from an approved process or procedure",
+"Ensuring processes are followed as per approved instructions",
+"Results within limits but showing unusual variation or trend"
+];
 
-WordX = new Array(2,9,0,10,3,1,14,5,4,1,6,11,18,9,14,12,17);
-WordY = new Array(0,2,4,5,9,14,16,19,0,2,2,2,2,8,8,9,10);
-LastHorizontalWord = 7;
-OnlyCheckOnce = false;
+WordX=[5,8,6,11,15,14,0,11,23,6,2,22,15,20];
+WordY=[2,5,7,9,12,15,19,0,0,4,5,8,9,13];
+LastHorizontalWord=6;
 </script>
 
-<script type="text/javascript">
+<script>
 var TableAcrossWord=[],TableDownWord=[];
 var CurrentWord=-1,PrevWordHorizontal=false;
 
-function PadNumber(n){return(n<10?"00":n<100?"0":"")+n;}
-function CellAt(x,y){return document.getElementById("c"+PadNumber(x)+PadNumber(y));}
+function Pad(n){return(n<10?"00":n<100?"0":"")+n;}
+function Cell(x,y){return document.getElementById("c"+Pad(x)+Pad(y));}
 
 (function(){
-	for(var x=0;x<CrosswordWidth;x++){
-		TableAcrossWord[x]=[]; TableDownWord[x]=[];
-		for(var y=0;y<CrosswordHeight;y++){
-			TableAcrossWord[x][y]=-1; TableDownWord[x][y]=-1;
-		}
-	}
-	for(var i=0;i<=LastHorizontalWord;i++)
-		for(var j=0;j<WordLength[i];j++)
-			TableAcrossWord[WordX[i]+j][WordY[i]]=i;
+for(let x=0;x<CrosswordWidth;x++){
+TableAcrossWord[x]=[];TableDownWord[x]=[];
+for(let y=0;y<CrosswordHeight;y++){
+TableAcrossWord[x][y]=-1;TableDownWord[x][y]=-1;
+}}
+for(let i=0;i<=LastHorizontalWord;i++)
+for(let j=0;j<WordLength[i];j++)
+TableAcrossWord[WordX[i]+j][WordY[i]]=i;
 
-	for(var i=LastHorizontalWord+1;i<Words;i++)
-		for(var j=0;j<WordLength[i];j++)
-			TableDownWord[WordX[i]][WordY[i]+j]=i;
+for(let i=LastHorizontalWord+1;i<Words;i++)
+for(let j=0;j<WordLength[i];j++)
+TableDownWord[WordX[i]][WordY[i]+j]=i;
 
-	document.write('<table id="crossword" style="display:none;border-collapse:collapse">');
-	for(var y=0;y<CrosswordHeight;y++){
-		document.write("<tr>");
-		for(var x=0;x<CrosswordWidth;x++){
-			if(TableAcrossWord[x][y]>=0||TableDownWord[x][y]>=0)
-				document.write('<td id="c'+PadNumber(x)+PadNumber(y)+'" class="ecw-box ecw-boxnormal_unsel" onclick="SelectThisWord(event)">&nbsp;</td>');
-			else document.write("<td></td>");
-		}
-		document.write("</tr>");
-	}
-	document.write("</table>");
+document.write('<table id="crossword" style="display:none">');
+for(let y=0;y<CrosswordHeight;y++){
+document.write("<tr>");
+for(let x=0;x<CrosswordWidth;x++){
+if(TableAcrossWord[x][y]>=0||TableDownWord[x][y]>=0)
+document.write('<td id="c'+Pad(x)+Pad(y)+'" class="ecw-box ecw-boxnormal_unsel" onclick="SelectWord(event)">&nbsp;</td>');
+else document.write("<td></td>");
+}
+document.write("</tr>");
+}
+document.write("</table>");
 
-	document.getElementById("waitmessage").style.display="none";
-	document.getElementById("crossword").style.display="block";
+document.getElementById("waitmessage").style.display="none";
+document.getElementById("crossword").style.display="block";
 })();
 
-function SelectThisWord(e){
-	if(CurrentWord>=0) OKClick();
-	var t=e.target;
-	var x=parseInt(t.id.substr(1,3));
-	var y=parseInt(t.id.substr(4,3));
-	if(TableAcrossWord[x][y]>=0&&TableDownWord[x][y]>=0)
-		CurrentWord=PrevWordHorizontal?TableDownWord[x][y]:TableAcrossWord[x][y];
-	else CurrentWord=Math.max(TableAcrossWord[x][y],TableDownWord[x][y]);
-	PrevWordHorizontal=CurrentWord<=LastHorizontalWord;
-	document.getElementById("answerbox").style.display="block";
-	document.getElementById("wordclue").innerHTML=Clue[CurrentWord];
+function SelectWord(e){
+var t=e.target;
+var x=parseInt(t.id.substr(1,3));
+var y=parseInt(t.id.substr(4,3));
+
+if(TableAcrossWord[x][y]>=0&&TableDownWord[x][y]>=0)
+CurrentWord=PrevWordHorizontal?TableDownWord[x][y]:TableAcrossWord[x][y];
+else CurrentWord=Math.max(TableAcrossWord[x][y],TableDownWord[x][y]);
+
+PrevWordHorizontal=CurrentWord<=LastHorizontalWord;
+
+document.getElementById("answerbox").style.display="block";
+document.getElementById("wordclue").innerHTML=Clue[CurrentWord];
 }
 
 function OKClick(){
-	if(CurrentWord<0) return;
-	var w=document.getElementById("wordentry").value.toUpperCase();
-	if(w.length!==WordLength[CurrentWord]) return;
-	for(var i=0;i<w.length;i++){
-		CellAt(
-			WordX[CurrentWord]+(CurrentWord<=LastHorizontalWord?i:0),
-			WordY[CurrentWord]+(CurrentWord>LastHorizontalWord?i:0)
-		).innerHTML=w[i];
-	}
-	document.getElementById("answerbox").style.display="none";
-	CurrentWord=-1;
+var w=document.getElementById("wordentry").value.toUpperCase();
+if(w.length!=WordLength[CurrentWord])return;
+
+for(let i=0;i<w.length;i++){
+Cell(
+WordX[CurrentWord]+(CurrentWord<=LastHorizontalWord?i:0),
+WordY[CurrentWord]+(CurrentWord>LastHorizontalWord?i:0)
+).innerHTML=w[i];
+}
+document.getElementById("answerbox").style.display="none";
+CurrentWord=-1;
 }
 
+/* ✅ FIXED SUBMISSION */
 function PrepareSubmission(){
-	var rows=[];
-	for(var y=0;y<CrosswordHeight;y++){
-		var row="";
-		for(var x=0;x<CrosswordWidth;x++){
-			var c=CellAt(x,y);
-			row+=(!c?"#":(c.innerHTML=="&nbsp;"?".":c.innerHTML));
-		}
-		rows.push(row);
-	}
-	document.getElementById("grid_data").value=rows.join("\n");
-	document.getElementById("is_complete").value=
-		rows.join("").indexOf(".")===-1?"1":"0";
-	return true;
+var rows=[];
+var incomplete=false;
+
+for(let y=0;y<CrosswordHeight;y++){
+let r="";
+for(let x=0;x<CrosswordWidth;x++){
+let c=Cell(x,y);
+
+if(!c){
+r+="#";
+}else if(c.innerHTML=="&nbsp;"||c.innerHTML==" "){
+r+=".";
+incomplete=true;
+}else{
+r+=c.innerHTML;
+}
+}
+rows.push(r);
+}
+
+if(incomplete){
+alert("⚠️ Please complete the crossword before submitting.");
+return false;
+}
+
+document.getElementById("grid_data").value=rows.join("\n");
+document.getElementById("is_complete").value="1";
+
+return true;
 }
 
 /* RANDOM LETTER REVEAL */
 setTimeout(function(){
-	for(var i=0;i<Words;i++){
-		var randomIndex=Math.floor(Math.random()*WordLength[i]);
-		var x=WordX[i]+(i<=LastHorizontalWord?randomIndex:0);
-		var y=WordY[i]+(i>LastHorizontalWord?randomIndex:0);
-		var c=CellAt(x,y);
-		if(c && c.innerHTML=="&nbsp;")
-			c.innerHTML=Word[i].charAt(randomIndex);
-	}
+for(let i=0;i<Words;i++){
+let r=Math.floor(Math.random()*WordLength[i]);
+let x=WordX[i]+(i<=LastHorizontalWord?r:0);
+let y=WordY[i]+(i>LastHorizontalWord?r:0);
+let c=Cell(x,y);
+if(c&&c.innerHTML=="&nbsp;")c.innerHTML=Word[i][r];
+}
 },500);
 </script>
 
 </td>
 
-<td valign="top" style="padding-left:1em;">
+<td valign="top" style="padding-left:20px">
+
 <div id="answerbox" class="ecw-answerbox" style="display:none">
-<div id="wordclue"></div>
-<input id="wordentry" style="width:100%;text-transform:uppercase;">
-<br><br>
+<div id="wordclue"></div><br>
+<input id="wordentry" style="width:100%;text-transform:uppercase;"><br><br>
 <button type="button" onclick="OKClick()">OK</button>
 <button type="button" onclick="document.getElementById('answerbox').style.display='none'">Cancel</button>
 </div>
-</td>
 
+</td>
 </tr></table>
 
-<div style="margin-top:1em;">
+<br>
 <button type="submit">Submit My Answers</button>
-</div>
 
 </form>
 
